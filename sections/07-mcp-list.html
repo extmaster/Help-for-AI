@@ -1,0 +1,52 @@
+<section id="mcp-list">
+    <h2>7. Рекомендуемые MCP серверы</h2>
+
+    <div class="card-grid">
+        <div class="card">
+            <h4>Context7</h4>
+            <p>Поиск по документации библиотек</p>
+            <pre><code>"url": "https://mcp.context7.com/mcp"</code></pre>
+        </div>
+        <div class="card">
+            <h4>Sentry</h4>
+            <p>Анализ ошибок</p>
+            <pre><code>"url": "https://mcp.sentry.dev/mcp"</code></pre>
+        </div>
+        <div class="card">
+            <h4>Grep (Vercel)</h4>
+            <p>Поиск кода на GitHub</p>
+            <pre><code>"url": "https://mcp.grep.app"</code></pre>
+        </div>
+        <div class="card">
+            <h4>GitHub</h4>
+            <p>Работа с issues, PR</p>
+            <p><em>Установка через расширения Zed</em></p>
+        </div>
+    </div>
+
+    <h3>Полный пример конфигурации MCP</h3>
+    <pre><code>{
+"$schema": "https://opencode.ai/config.json",
+"mcp": {
+"context7": {
+  "type": "remote",
+  "url": "https://mcp.context7.com/mcp",
+  "enabled": true
+},
+"sentry": {
+  "type": "remote",
+  "url": "https://mcp.sentry.dev/mcp",
+  "oauth": {}
+},
+"gh_grep": {
+  "type": "remote",
+  "url": "https://mcp.grep.app"
+}
+},
+"instructions": ["CONTRIBUTING.md", "docs/guidelines.md"]
+}</code><button class="copy-btn">Копировать</button></pre>
+
+    <div class="highlight warning">
+        <p><strong>Предупреждение:</strong> MCP серверы добавляют токены в контекст. Не подключай все подряд — выбирай только нужные для текущей задачи.</p>
+    </div>
+</section>

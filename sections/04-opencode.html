@@ -1,0 +1,146 @@
+<section id="opencode">
+    <h2>4. Настройка OpenCode (терминальный агент)</h2>
+
+    <h3>Установка</h3>
+    <pre><code>curl -fsSL https://opencode.ai/install | bash
+# или
+npm install -g opencode-ai</code><button class="copy-btn">Копировать</button></pre>
+
+    <h3>Инициализация проекта</h3>
+    <pre><code>cd /path/to/project
+opencode
+/init  # создаст AGENTS.md автоматически</code><button class="copy-btn">Копировать</button></pre>
+
+    <h3>Конфигурация MCP серверов</h3>
+    <p>Создай <code>opencode.json</code> в корне проекта:</p>
+    <pre><code>{
+"$schema": "https://opencode.ai/config.json",
+"mcp": {
+"context7": {
+  "type": "remote",
+  "url": "https://mcp.context7.com/mcp"
+},
+"sentry": {
+  "type": "remote", 
+  "url": "https://mcp.sentry.dev/mcp",
+  "oauth": {}
+},
+"local-server": {
+  "type": "local",
+  "command": ["npx", "-y", "my-mcp-server"]
+}
+}
+}</code><button class="copy-btn">Копировать</button></pre>
+
+    <h3>Skills (переиспользуемые инструкции)</h3>
+    <p>Создай <code>.opencode/skills/git-release/SKILL.md</code>:</p>
+    <pre><code>---
+name: git-release
+description: Создание релизов и changelog
+---
+
+## Что делаю
+- Составляю release notes из PR
+- Предлагаю версию
+- Даю команду gh release create
+
+## Когда использовать
+При подготовке релиза.</code><button class="copy-btn">Копировать</button></pre>
+
+    <h3>Синхронизация конфигураций (opencode-team-sync)</h3>
+    <div class="highlight info">
+        <p><strong>Цель:</strong> Обеспечить идентичность настроек OpenCode (агентов, скиллов) между разными компьютерами, используя приватный Git-репозиторий как облачное хранилище.</p>
+    </div>
+
+    <div class="collapsible">
+        <div class="collapsible-header"><span>Шаг 1: Создание приватного Git-репозитория</span></div>
+        <div class="collapsible-content">
+            <p>Лучше всего использовать приватный репозиторий на GitHub, чтобы ваши настройки были доступны только вам.</p>
+            <ol>
+                <li>Зайдите на GitHub и нажмите "New repository".</li>
+                <li>Назовите его, например, <code>opencode-configs</code>.</li>
+                <li>**Обязательно** выберите тип <strong>Private</strong>.</li>
+                <li>Нажмите "Create repository".</li>
+            </ol>
+        </div>
+    </div>
+
+    <div class="collapsible">
+        <div class="collapsible-header"><span>Шаг 2: Структурирование и загрузка настроек</span></div>
+        <div class="collapsible-content">
+            <p>Создайте на локальном компьютере папку со следующей структурой и скопируйте в неё ваши существующие агенты и навыки из <code>~/.config/opencode/</code>:</p>
+            <pre><code>my-opencode-configs/
+    ├── agents/       # Сюда .md файлы агентов
+    └── skills/       # Сюда папки с навыками</code></pre>
+            <p>Затем загрузите эту папку в созданный репозиторий:</p>
+            <pre><code>cd my-opencode-configs
+    git init
+    git add .
+    git commit -m "Initial configs"
+    git remote add origin YOUR_REPO_URL
+    git push -u origin main</code></pre>
+        </div>
+    </div>
+
+    <div class="collapsible">
+        <div class="collapsible-header"><span>Шаг 3: Установка и настройка opencode-team-sync</span></div>
+        <div class="collapsible-content">
+            <p>На <strong>каждом</strong> компьютере (рабочем и домашнем) установите утилиту:</p>
+            <pre><code>npm install -g opencode-team-sync</code></pre>
+            <p>Затем, в папке вашего проекта, инициализируйте синхронизацию:</p>
+            <pre><code>oct init https://github.com/YourUsername/opencode-configs.git</code></pre>
+            <p>Утилита скачает настройки и свяжет их с вашей локальной конфигурацией OpenCode.</p>
+        </div>
+    </div>
+
+    <div class="collapsible">
+        <div class="collapsible-header"><span>Шаг 4: Рабочий процесс синхронизации</span></div>
+        <div class="collapsible-content">
+            <ol>
+                <li><strong>Внесли изменения?</strong> (например, добавили нового агента). Добавьте его в вашу локальную папку с конфигами и отправьте в Git-репозиторий.</li>
+                <li><strong>На другом компьютере?</strong> Просто выполните команду для получения обновлений:</li>
+            </ol>
+            <pre><code># Проверить наличие обновлений
+    oct status
+
+    # Скачать и применить обновления
+    oct update</code></pre>
+            <div class="highlight warning"><p><strong>Важно:</strong> Судя по документации, инструмент находится в активной разработке, но является самым подходящим решением для этой задачи.</p></div>
+        </div>
+    </div>
+
+    <h3>Бесплатная аутентификация (Claude/Gemini)</h3>
+    <p>Этот метод позволяет использовать мощные модели, такие как Claude Opus и Gemini, бесплатно через плагин <code>opencode-antigravity-auth</code>.</p>
+
+    <div class="collapsible">
+        <div class="collapsible-header"><span>Шаг 1: Настройка плагина</span></div>
+        <div class="collapsible-content">
+            <p>Добавьте плагин в ваш глобальный файл конфигурации <code>~/.config/opencode/opencode.json</code>:</p>
+            <pre><code>{
+      "$schema": "https://opencode.ai/config.json",
+      "plugin": [
+        "opencode-antigravity-auth@beta"
+      ]
+    }</code></pre>
+        </div>
+    </div>
+
+    <div class="collapsible">
+        <div class="collapsible-header"><span>Шаг 2: Процесс аутентификации</span></div>
+        <div class="collapsible-content">
+            <ol>
+                <li>Выполните в терминале команду: <code>opencode auth login</code>.</li>
+                <li>В появившемся списке выберите "Google", а затем "OAuth with Google (Antigravity)".</li>
+                <li>Браузер откроет страницу входа в Google. Авторизуйтесь.</li>
+                <li>После успешного входа вы увидите сообщение "Login successful — Done".</li>
+            </ol>
+        </div>
+    </div>
+
+    <div class="collapsible">
+        <div class="collapsible-header"><span>Шаг 3: Обновление конфигурации моделей</span></div>
+        <div class="collapsible-content">
+            <p>После аутентификации обновите ваш <code>opencode.json</code>, добавив в него блок с моделями, как указано в документации плагина. Это активирует доступ к новым моделям в OpenCode.</p>
+        </div>
+    </div>
+</section>

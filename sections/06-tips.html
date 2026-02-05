@@ -1,0 +1,119 @@
+<section id="tips">
+    <h2>6. Эффективная работа с ИИ</h2>
+
+    <div class="highlight warning">
+        <p><strong>Почему тратится много времени и денег без результата:</strong></p>
+    </div>
+
+    <table>
+        <tr>
+            <th>Проблема</th>
+            <th>Решение</th>
+        </tr>
+        <tr>
+            <td>ИИ не понимает проект</td>
+            <td>Создай <code>AGENTS.md</code> с описанием структуры</td>
+        </tr>
+        <tr>
+            <td>Повторяю одно и то же</td>
+            <td>Добавь инструкции в rules</td>
+        </tr>
+        <tr>
+            <td>ИИ делает не то</td>
+            <td>Используй Plan mode сначала, потом Build</td>
+        </tr>
+        <tr>
+            <td>Много токенов уходит</td>
+            <td>Ограничь MCP серверы, не подключай всё подряд</td>
+        </tr>
+        <tr>
+            <td>Контекст теряется между компьютерами</td>
+            <td>Храни важное в <code>AGENTS.md</code> в Git</td>
+        </tr>
+    </table>
+
+    <h3>Формула хорошего запроса</h3>
+    <div class="highlight">
+        <p><strong>[Контекст] + [Конкретная задача] + [Ограничения] + [Формат вывода]</strong></p>
+    </div>
+
+    <div class="card-grid">
+        <div class="card">
+            <h4>Плохой запрос</h4>
+            <p>«Сделай авторизацию»</p>
+        </div>
+        <div class="card">
+            <h4>Хороший запрос</h4>
+            <p>«Добавь JWT авторизацию в @src/api/auth.ts. Используй jsonwebtoken. Токен храни в httpOnly cookie. Покажи план перед реализацией.»</p>
+        </div>
+    </div>
+
+    <h3>Основные команды OpenCode</h3>
+    <table>
+        <tr>
+            <th>Команда</th>
+            <th>Описание</th>
+        </tr>
+        <tr>
+            <td><code>/init</code></td>
+            <td>Инициализация проекта, создание AGENTS.md</td>
+        </tr>
+        <tr>
+            <td><code>/undo</code></td>
+            <td>Откатить последние изменения</td>
+        </tr>
+        <tr>
+            <td><code>/redo</code></td>
+            <td>Вернуть откаченные изменения</td>
+        </tr>
+        <tr>
+            <td><code>/share</code></td>
+            <td>Поделиться ссылкой на разговор</td>
+        </tr>
+        <tr>
+            <td><code>Tab</code></td>
+            <td>Переключение между Plan/Build режимами</td>
+        </tr>
+        <tr>
+            <td><code>@filename</code></td>
+            <td>Упомянуть файл в промпте</td>
+        </tr>
+    </table>
+
+    <h3>Горячие клавиши Zed Agent Panel</h3>
+    <table>
+        <tr>
+            <th>Действие</th>
+            <th>Mac</th>
+            <th>Linux/Windows</th>
+        </tr>
+        <tr>
+            <td>Новый чат</td>
+            <td colspan="2">Command Palette → <code>agent: new thread</code></td>
+        </tr>
+        <tr>
+            <td>Недавние чаты</td>
+            <td><span class="kbd">Cmd</span>+<span class="kbd">Shift</span>+<span class="kbd">J</span></td>
+            <td><span class="kbd">Ctrl</span>+<span class="kbd">Shift</span>+<span class="kbd">J</span></td>
+        </tr>
+        <tr>
+            <td>Вся история</td>
+            <td><span class="kbd">Cmd</span>+<span class="kbd">Shift</span>+<span class="kbd">H</span></td>
+            <td><span class="kbd">Ctrl</span>+<span class="kbd">Shift</span>+<span class="kbd">H</span></td>
+        </tr>
+        <tr>
+            <td>Смена модели</td>
+            <td><span class="kbd">Cmd</span>+<span class="kbd">Alt</span>+<span class="kbd">/</span></td>
+            <td><span class="kbd">Ctrl</span>+<span class="kbd">Alt</span>+<span class="kbd">/</span></td>
+        </tr>
+        <tr>
+            <td>Обзор изменений</td>
+            <td><span class="kbd">Shift</span>+<span class="kbd">Ctrl</span>+<span class="kbd">R</span></td>
+            <td><span class="kbd">Ctrl</span>+<span class="kbd">Shift</span>+<span class="kbd">R</span></td>
+        </tr>
+        <tr>
+            <td>Следить за агентом</td>
+            <td colspan="2">Иконка «прицел» внизу слева панели</td>
+        </tr>
+    </table>
+</section>

@@ -1,0 +1,50 @@
+<section id="zed-history">
+    <h2>3. Навигация по истории чатов в Zed</h2>
+
+    <div class="highlight info">
+        <p><strong>Важно:</strong> Чаты хранятся локально на компьютере. Между разными компьютерами история не синхронизируется автоматически.</p>
+    </div>
+
+    <h3>Быстрый доступ к недавним чатам</h3>
+    <table>
+        <tr>
+            <th>Действие</th>
+            <th>Mac</th>
+            <th>Linux/Windows</th>
+        </tr>
+        <tr>
+            <td>6 последних чатов</td>
+            <td><span class="kbd">Cmd</span>+<span class="kbd">Shift</span>+<span class="kbd">J</span></td>
+            <td><span class="kbd">Ctrl</span>+<span class="kbd">Shift</span>+<span class="kbd">J</span></td>
+        </tr>
+        <tr>
+            <td>Вся история чатов</td>
+            <td><span class="kbd">Cmd</span>+<span class="kbd">Shift</span>+<span class="kbd">H</span></td>
+            <td><span class="kbd">Ctrl</span>+<span class="kbd">Shift</span>+<span class="kbd">H</span></td>
+        </tr>
+    </table>
+    <p>Также можно кликнуть на иконку меню (...) в правом верхнем углу Agent Panel и выбрать <strong>"View All"</strong>.</p>
+
+    <h3>Использование старого чата как контекст</h3>
+    <p>В новом чате набери <code>@</code> и выбери нужный thread из списка — его содержимое добавится как контекст.</p>
+
+    <h3>Сохранение чата для другого компьютера</h3>
+    <div class="card-grid">
+        <div class="card">
+            <h4>Экспорт в Markdown</h4>
+            <p>Action: <code>agent: open thread as markdown</code></p>
+            <p>Сохрани файл в облако или Git репозиторий</p>
+        </div>
+        <div class="card">
+            <h4>AGENTS.md</h4>
+            <p>Ключевые договорённости держи в файле <code>AGENTS.md</code> в репозитории</p>
+            <p>Он будет на всех машинах при клонировании</p>
+        </div>
+    </div>
+
+    <h3>Новый чат из текущего с резюме</h3>
+    <p>Когда контекст переполняется, Zed предложит создать новый чат с summary текущего. Можно сделать это вручную:</p>
+    <ul>
+        <li>Меню Agent Panel → <strong>"New from Summary"</strong></li>
+    </ul>
+</section>

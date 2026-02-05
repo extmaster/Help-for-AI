@@ -1,0 +1,73 @@
+<section id="zed">
+    <h2>2. Настройка Zed Editor</h2>
+
+    <div class="tabs">
+        <button class="tab active" data-tab="zed-rules">Rules</button>
+        <button class="tab" data-tab="zed-mcp">MCP серверы</button>
+        <button class="tab" data-tab="zed-check">Проверка</button>
+    </div>
+
+    <div id="zed-rules" class="tab-content active">
+        <h3>Шаг 1: Создание Rules</h3>
+        <p>Создай файл в корне проекта (любое из названий):</p>
+        <ul>
+            <li><code>.rules</code> (рекомендуется для Zed)</li>
+            <li><code>AGENTS.md</code> (универсальный)</li>
+            <li><code>CLAUDE.md</code> (совместимость с Claude)</li>
+        </ul>
+
+        <h4>Пример содержимого:</h4>
+        <pre><code class="language-markdown"># Мой проект
+
+## Структура
+- `src/` - исходный код
+- `tests/` - тесты
+
+## Стандарты кода
+- TypeScript strict mode
+- Функциональный стиль
+- Комментарии на русском
+
+## Важно
+- Для API используй axios
+- Тесты пишем на vitest</code><button class="copy-btn">Копировать</button></pre>
+    </div>
+
+    <div id="zed-mcp" class="tab-content">
+        <h3>Шаг 2: MCP серверы в Zed</h3>
+        <p>Открой <code>settings.json</code> (Cmd+, или Ctrl+,):</p>
+
+        <pre><code class="language-json">{
+"context_servers": {
+"context7": {
+  "command": "npx",
+  "args": ["-y", "@context7/mcp-server"]
+},
+"remote-mcp-server": {
+  "url": "https://mcp.example.com",
+  "headers": { "Authorization": "Bearer TOKEN" }
+}
+}
+}</code><button class="copy-btn">Копировать</button></pre>
+
+        <h4>Или через расширения Zed:</h4>
+        <ol>
+            <li>Cmd+Shift+P → <code>zed: extensions</code></li>
+            <li>Найди нужный MCP сервер (Context7, GitHub, Puppeteer)</li>
+            <li>Установи и настрой API ключи</li>
+        </ol>
+    </div>
+
+    <div id="zed-check" class="tab-content">
+        <h3>Шаг 3: Проверка работы MCP</h3>
+        <ol>
+            <li>Открой Agent Panel</li>
+            <li>Меню (...) → Settings</li>
+            <li>Смотри индикатор рядом с сервером:</li>
+        </ol>
+        <ul>
+            <li><span style="color: var(--success);">Зелёный</span> = работает</li>
+            <li>Другой цвет = проблема</li>
+        </ul>
+    </div>
+</section>
